@@ -1,53 +1,28 @@
-package com.spring.presentation.model;
+package com.spring.presentation.service;
 
-import javax.persistence.*;
-import java.util.Date;
+import java.io.Serializable;
 
 /**
  * @author Nicoleta GHITESCU at 27-Mar-18
  */
 
-@Entity
-@Table(name = "laboratories")
-public class Laboratory {
+public class LaboratoryDTO implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "LABORATORY_UID")
-    private Long laboratoryUid;
-
-    @Column(name = "NUMBER")
     private Long number;
-
-    @Column(name = "DATE")
     private String date;
-
-    @Column(name = "TITLE")
     private String title;
-
-    @Column(name = "CURRICULA")
     private String curricula;
-
-    @Column(name = "DESCRIPTION")
     private String description;
 
-    public Laboratory() {
+    public LaboratoryDTO() {
     }
 
-    public Laboratory(Long number, String date, String title, String curricula, String description) {
+    public LaboratoryDTO(Long number, String date, String title, String curricula, String description) {
         this.number = number;
         this.date = date;
         this.title = title;
         this.curricula = curricula;
         this.description = description;
-    }
-
-    public Long getLaboratoryUid() {
-        return laboratoryUid;
-    }
-
-    public void setLaboratoryUid(Long laboratoryUid) {
-        this.laboratoryUid = laboratoryUid;
     }
 
     public Long getNumber() {
@@ -92,16 +67,12 @@ public class Laboratory {
 
     @Override
     public String toString() {
-        return "Laboratory{" +
-                "laboratoryUid=" + laboratoryUid +
-                ", number='" + number + '\'' +
+        return "LaboratoryDTO{" +
+                "number='" + number + '\'' +
                 ", date='" + date + '\'' +
                 ", title='" + title + '\'' +
                 ", curricula='" + curricula + '\'' +
                 ", description='" + description + '\'' +
-
                 '}';
     }
-
-
 }
