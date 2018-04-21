@@ -1,6 +1,7 @@
 package com.spring.presentation.service.impl;
 
 import com.spring.presentation.dao.StudentDAO;
+import com.spring.presentation.model.Admin;
 import com.spring.presentation.model.Student;
 import com.spring.presentation.service.StudentDTO;
 import com.spring.presentation.service.StudentService;
@@ -31,9 +32,12 @@ public class StudentServiceImpl implements StudentService {
         return studentDAO.findOne(studentId);
     }
 
+    public Student getStudentByEmailAndToken(String email, String token) {
+        return studentDAO.findByEmailAndToken(email,token);
+    }
 
     public Student saveStudent(StudentDTO studentDTO) {
-        Student studentToBeSaved = new Student(studentDTO.getEmail(), studentDTO.getFullname(), studentDTO.getGrupa(), studentDTO.getHobby(), studentDTO.getToken());
+        Student studentToBeSaved = new Student(studentDTO.getEmail(),studentDTO.getPassword(), studentDTO.getFullname(), studentDTO.getGrupa(), studentDTO.getHobby(), studentDTO.getToken());
 
         if (studentDAO.findByEmailAndFullname(studentToBeSaved.getEmail(), studentToBeSaved.getFullname() ) == null) {
 
@@ -49,11 +53,12 @@ public class StudentServiceImpl implements StudentService {
         Student studentToBeUpdated = studentDAO.findOne(studentId);
 
         if (studentToBeUpdated != null) {
-            studentToBeUpdated.setEmail(studentDTO.getEmail());
+
+            studentToBeUpdated.setPassword((studentDTO.getPassword()));
             studentToBeUpdated.setFullname(studentDTO.getFullname());
             studentToBeUpdated.setGrupa(studentDTO.getGrupa());
             studentToBeUpdated.setHobby(studentDTO.getHobby());
-            studentToBeUpdated.setToken(studentDTO.getToken());
+
 
             studentDAO.save(studentToBeUpdated);
             return studentToBeUpdated;

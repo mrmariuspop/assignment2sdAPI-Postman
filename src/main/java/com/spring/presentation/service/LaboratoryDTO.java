@@ -8,6 +8,7 @@ import java.io.Serializable;
 
 public class LaboratoryDTO implements Serializable {
 
+
     private Long number;
     private String date;
     private String title;
@@ -24,6 +25,9 @@ public class LaboratoryDTO implements Serializable {
         this.curricula = curricula;
         this.description = description;
     }
+
+
+
 
     public Long getNumber() {
         return number;

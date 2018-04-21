@@ -1,7 +1,11 @@
 package com.spring.presentation.model;
 
+import com.spring.presentation.service.Tokenizer;
+
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Nicoleta GHITESCU at 27-Mar-18
@@ -19,6 +23,9 @@ public class Student {
     @Column(name = "EMAIL")
     private String email;
 
+    @Column(name = "PASSWORD")
+    private String password;
+
     @Column(name = "FULLNAME")
     private String fullname;
 
@@ -30,13 +37,16 @@ public class Student {
 
     @Column(name = "TOKEN")
     private String token;
-
+/*
+    @ManyToMany(mappedBy ="listStudents")
+    private Set<Attendance> listAttendences = new HashSet<Attendance>();*/
 
     public Student() {
     }
 
-    public Student(String email, String fullname, Long grupa, String hobby, String token) {
+    public Student(String email, String password, String fullname, Long grupa, String hobby, String token) {
         this.email = email;
+        this.password = password;
         this.fullname = fullname;
         this.grupa = grupa;
         this.hobby = hobby;
@@ -88,14 +98,31 @@ public class Student {
     }
 
     public void setToken(String token) {
-        this.token = token;
+        this.token = Tokenizer.getSaltString();
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+   /* public Set<Attendance> getListAttendences() {
+        return listAttendences;
+    }
+
+    public void setListAttendences(Set<Attendance> listAttendences) {
+        this.listAttendences = listAttendences;
+    }
+*/
     @Override
     public String toString() {
         return "Student{" +
                 "studentUid=" + studentId +
                 ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
                 ", fullname='" + fullname + '\'' +
                 ", grupa='" + grupa + '\'' +
                 ", hobby='" + hobby + '\'' +

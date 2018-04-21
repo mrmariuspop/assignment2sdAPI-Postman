@@ -14,6 +14,8 @@ public interface StudentService {
 
     Student getStudentById(Long studentId);
 
+    Student getStudentByEmailAndToken(String email, String token);
+
     Student saveStudent(StudentDTO StudentDTO);
 
     Student updateStudent(Long studentId, StudentDTO StudentDTO);

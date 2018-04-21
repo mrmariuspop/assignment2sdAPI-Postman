@@ -26,7 +26,7 @@ public class AdminController {
     }
 
 
-    @GetMapping("getAdminByEmailAndPassword")
+    @GetMapping("login")
     public Admin getAdminByEmailAndPassword(@RequestParam String email, @RequestParam String password) {
         try {
             return adminService.getAdminByEmailAndPassword(email, password);

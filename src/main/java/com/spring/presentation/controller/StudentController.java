@@ -43,6 +43,16 @@ public class StudentController {
         }
     }
 
+    @GetMapping("register")
+    public Student getStudentByEmailAndToken(@RequestParam String email, @RequestParam String token) {
+        try {
+            return studentService.getStudentByEmailAndToken(email, token);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     @PostMapping("saveStudent")
     public Student saveStudent(@RequestBody StudentDTO studentDTO) {
         try {
