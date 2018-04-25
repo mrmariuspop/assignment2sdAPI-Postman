@@ -1,13 +1,11 @@
 package com.spring.presentation.service.impl;
 
 import com.spring.presentation.dao.AttendenceDAO;
-import com.spring.presentation.dao.BookDAO;
+import com.spring.presentation.dao.StudentDAO;
 import com.spring.presentation.model.Attendance;
-import com.spring.presentation.model.Book;
+import com.spring.presentation.model.Student;
 import com.spring.presentation.service.AttendenceDTO;
 import com.spring.presentation.service.AttendenceService;
-import com.spring.presentation.service.BookDTO;
-import com.spring.presentation.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,10 +19,12 @@ import java.util.List;
 public class AttendenceServiceImpl implements AttendenceService {
 
     private final AttendenceDAO attendenceDAO;
+    private final StudentDAO studentDAO;
 
     @Autowired
-    public AttendenceServiceImpl(AttendenceDAO attendenceDAO) {
+    public AttendenceServiceImpl(AttendenceDAO attendenceDAO ,StudentDAO studentDAO) {
         this.attendenceDAO = attendenceDAO;
+        this.studentDAO=studentDAO;
     }
 
     public List<Attendance> getAllAttendences() {
@@ -62,5 +62,16 @@ public class AttendenceServiceImpl implements AttendenceService {
 
     public void deleteAttendenceById(Long attendenceId) {
         attendenceDAO.delete(attendenceId);
+    }
+
+    @Override
+    public void addPresentStudent(long attendanceID , long studentID) {
+
+        Attendance a = attendenceDAO.getOne(attendanceID);
+        Student s = studentDAO.getOne(studentID);
+
+        a.addStudent(s);
+        attendenceDAO.save(a);
+
     }
 }

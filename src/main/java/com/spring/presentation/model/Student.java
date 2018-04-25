@@ -12,7 +12,7 @@ import java.util.Set;
  */
 
 @Entity
-@Table(name = "students")
+@Table(name = "student")
 public class Student {
 
     @Id
@@ -37,9 +37,31 @@ public class Student {
 
     @Column(name = "TOKEN")
     private String token;
-/*
-    @ManyToMany(mappedBy ="listStudents")
-    private Set<Attendance> listAttendences = new HashSet<Attendance>();*/
+
+    @OneToMany(mappedBy = "student")
+    private Set<Submission> assigmentStudent  = new HashSet<>();
+
+
+
+    @ManyToMany(mappedBy = "students") // numele variabilei/listei de studenti din attendance
+    private Set<Attendance> attendances=new HashSet<>();
+
+    public Long getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(Long studentId) {
+        this.studentId = studentId;
+    }
+
+    public Set<Submission> getAssigmentStudent() {
+        return assigmentStudent;
+    }
+
+    public void setAssigmentStudent(Set<Submission> assigmentStudent) {
+        this.assigmentStudent = assigmentStudent;
+    }
+
 
     public Student() {
     }
@@ -107,6 +129,14 @@ public class Student {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<Attendance> getAttendances() {
+        return attendances;
+    }
+
+    public void setAttendances(Set<Attendance> attendances) {
+        this.attendances = attendances;
     }
 
    /* public Set<Attendance> getListAttendences() {

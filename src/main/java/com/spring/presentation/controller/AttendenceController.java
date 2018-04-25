@@ -75,4 +75,9 @@ public class AttendenceController {
             return e.getMessage();
         }
     }
+
+    @PutMapping("updatePresence")
+    public void updateStudent(@RequestParam Long studentId,Long attendanceId) {
+        attendenceService.addPresentStudent(attendanceId,studentId);
+    }
 }

@@ -6,19 +6,28 @@ import java.io.Serializable;
  * @author Nicoleta GHITESCU at 27-Mar-18
  */
 
-public class AssignmentDTO implements Serializable {
+public class AssigmentDTO implements Serializable {
 
     private String name;
     private String deadline;
     private String description;
+    private Long laboratoryId;
 
-    public AssignmentDTO() {
+    public AssigmentDTO() {
     }
 
-    public AssignmentDTO(String name, String deadline, String description) {
+    public AssigmentDTO(String name, String deadline, String description) {
         this.name = name;
         this.deadline = deadline;
         this.description = description;
+    }
+
+    public Long getLaboratoryId() {
+        return laboratoryId;
+    }
+
+    public void setLaboratoryId(Long laboratoryId) {
+        this.laboratoryId = laboratoryId;
     }
 
     public String getName() {
@@ -47,7 +56,7 @@ public class AssignmentDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "AssignmentDTO{" +
+        return "AssigmentDTO{" +
                 "name='" + name + '\'' +
                 ", deadline='" + deadline + '\'' +
                 ", description='" + description + '\'' +

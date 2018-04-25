@@ -1,20 +1,24 @@
 package com.spring.presentation.model;
 
+import jdk.nashorn.internal.ir.Assignment;
+
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Nicoleta GHITESCU at 27-Mar-18
  */
 
 @Entity
-@Table(name = "assignments")
-public class Assignment {
+@Table(name = "assigment")
+public class Assigment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ASSIGNMENT_UID")
-    private Long assignmentUid;
+    private Long assigmentUid;
 
     @Column(name = "NAME")
     private String name;
@@ -25,21 +29,37 @@ public class Assignment {
     @Column(name = "DESCRIPTION")
     private String description;
 
-    public Assignment() {
+    @ManyToOne
+    @JoinColumn(name = "laboratoryId")
+    private Laboratory laboratory;
+
+    public Laboratory getLaboratory() {
+        return laboratory;
     }
 
-    public Assignment(String name, String deadline, String description) {
+    public void setLaboratory(Laboratory laboratory) {
+        this.laboratory = laboratory;
+    }
+
+    @OneToMany(mappedBy = "assigment")
+    private Set<Submission> assigmentStudent = new HashSet<>();
+
+
+    public Assigment() {
+    }
+
+    public Assigment(String name, String deadline, String description) {
         this.name = name;
         this.deadline = deadline;
         this.description = description;
     }
 
-    public Long getAssignmentUid() {
-        return assignmentUid;
+    public Long getassigmentUid() {
+        return assigmentUid;
     }
 
-    public void setAssignmentUid(Long assignmentUid) {
-        this.assignmentUid = assignmentUid;
+    public void setassigmentUid(Long assigmentUid) {
+        this.assigmentUid = assigmentUid;
     }
 
     public String getName() {
@@ -66,10 +86,18 @@ public class Assignment {
         this.description = description;
     }
 
+    public Set<Submission> getAssigmentStudent() {
+        return assigmentStudent;
+    }
+
+    public void setAssigmentStudent(Set<Submission> assigmentStudent) {
+        this.assigmentStudent = assigmentStudent;
+    }
+
     @Override
     public String toString() {
-        return "Assignment{" +
-                "AssignmentUid=" + assignmentUid +
+        return "Assigment{" +
+                "assigmentUid=" + assigmentUid +
                 ", name='" + name + '\'' +
                 ", deadline='" + deadline + '\'' +
                 ", description='" + description + '\'' +
